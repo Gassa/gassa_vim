@@ -1,13 +1,10 @@
-gassa_vim
-=========
+##Description:
 
-Manage all of my vim plugin with git repo. <br />
-Load vim configuration from in $HOME/.vimrc by "source $HOME/.vim/gassavimrc" <br />
+ - Manage all of my vim plugin with git repo.
+ - Load vim configuration from in $HOME/.vimrc by "source $HOME/.vim/gassavimrc"
 
-<ul>
-<caption>Current plugins: </caption>
 
-<liNERD_tree</li
-<lisrcexpl</li>
-<liaglist</li>
-</ul>
+##Current plugins:
+ - NERD_tree
+ - srcexpl
+ - taglist
