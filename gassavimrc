@@ -27,6 +27,9 @@ set whichwrap=b,s,h,l,<,>,[,]   " move freely between files
 
 set autoindent     " always set autoindenting on
 set smartindent        " smart indent
+set tw=80
+set formatoptions+=t    "automatically wrap test at 80th characters.
+set wrap linebreak nolist "soft wrap
 "set cindent            " cindent
 "set noautoindent
 "set nosmartindent
@@ -105,29 +108,88 @@ function! Make()
     execute 'lcd -'
 endfunction
 
-nnoremap <F7> :update<CR>:call Make()<CR>
-nnoremap <silent> <F8> :TlistToggle<CR>
-set tags=tags,./../tags,./../tags,./../../tags,./../../../tags
+"----------------------------cscopeconfiguration------------------------
+    
+
+"-----------------------Keyboard mapping setting------------------------
+"{cmd} {attr} {lhs} {rhs}
+"
+"example:
+"  map <F2> :echo 'Current time is ' . strftime('%c')<CR>
+"  map! <F3> a<C-R>=strftime('%c')<CR><Esc>
+"  nnoremap <silent> <F2> :lchdir %:p:h<CR>:pwd<CR>
+"
+"where
+"{cmd}  is one of ':map', ':map!', ':nmap', ':vmap', ':imap',
+"':cmap', ':smap', ':xmap', ':omap', ':lmap', etc.
+"{attr} is optional and one or more of the following: <buffer>, <silent>,
+"<expr> <script>, <unique> and <special>.
+"More than one attribute can be specified to a map.
+"{lhs}  left hand side, is a sequence of one or more keys
+"that are being
+"mapped.
+"{rhs}  right hand side, is the sequence of keys that
+"the {lhs} keys are
+"mapped to.
+
+
+"nmap - Display normal mode maps
+"imap - Display insert mode maps
+"vmap - Display visual and select mode maps
+"smap - Display select mode maps
+"xmap - Display visual mode maps
+"cmap - Display command-line mode maps
+"omap - Display operator pending mode maps
+"
+"Removing map: :unmap <F8> or :unmap! <F8>
+"
+"Key notation:
+"
+"Ctrl-KEY  -> <C-KEY>
+"Shit-KEY  -> <S-KEY>
+"Super-KEY -> <D-KEY>
+"Ctrl-I    -> TAB
+"Ctrl-[    -> ESC
+"Ctrl-M    -> Enter
+"Ctrl-H    -> Backspace <BS>
+"Enter     -> <CR>
+"
+"---------------------------Map attributes------------------------------------
+"<buffer> <silent>, <special>, <script>, <expr>, and <unique>
+"example:
+"
+":nnoremap <silent> <F2> :lchdir %:p:h<CR>:pwd<CR>
+"<silent> : disble the visiblility of command execution 
+"
+"<expr> : map command to invoke a Vim function and use the returned value as the
+"key sequence to execute
+"
+
+
+"Tlist plugin mapping
+"nnoremap <F7> :update<CR>:call Make()<CR>
+"nnoremap <silent> <F8> :TlistToggle<CR>
+"set tags=tags,./../tags,./../tags,./../../tags,./../../../tags,./../../../../tags,./../../../../../tags,./../../../../../../tags,./../../../../../../../tags,./../../../../../../../../tags
 
 
 " Keyboard mappings
 map <F1> :previous<CR>  " map F1 to open previous buffer
 map <F2> :next<CR>      " map F2 to open next buffer
 map <silent> <C-N> :silent noh<CR> " turn off highlighted search
-map ,v :sp ~/.vimrc<cr> " edit my .vimrc file in a split
-map ,e :e ~/.vimrc<cr>      " edit my .vimrc file
-map ,u :source ~/.vimrc<cr> " update the system settings from my vimrc file
+"map ,v :sp ~/.vimrc<cr> " edit my .vimrc file in a split
+"map ,e :e ~/.vimrc<cr>      " edit my .vimrc file
+"map ,u :source ~/.vimrc<cr> " update the system settings from my vimrc file
 "----- write out html file
-map ,h :source $VIM/vim70/syntax/2html.vim<cr>:w<cr>:clo<cr>
+"map ,h :source $VIM/vim70/syntax/2html.vim<cr>:w<cr>:clo<cr>
 
 " Open and close all the three plugins on the same time
-nmap <C-F7> :TrinityToggleAll<CR>
+"nmap <C-F7> :TrinityToggleAll<CR>
 " Open and close the srcexpl.vim separately
-nmap <C-F9> :TrinityToggleSourceExplorer<CR>
+"nmap <C-F9> :TrinityToggleSourceExplorer<CR>
 " Open and close the taglist.vim separately
-nmap <C-F10> :TrinityToggleTagList<CR>
+"nmap <C-F10> :TrinityToggleTagList<CR>
 " Open and close the NERD_tree.vim separately
-nmap <C-F11> :TrinityToggleNERDTree<CR>
+"nmap <C-F11> :TrinityToggleNERDTree<CR>
 
 " Common command line typos
 "cmap W w
