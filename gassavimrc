@@ -24,23 +24,26 @@ set shortmess=atI   " Abbreviate messages
 set nostartofline   " don't jump to first character when paging
 set whichwrap=b,s,h,l,<,>,[,]   " move freely between files
 "set viminfo='20,<50,s10,h
-
 set autoindent     " always set autoindenting on
-set smartindent        " smart indent
-set tw=80
-set formatoptions+=t    "automatically wrap test at 80th characters.
+"set smartindent        " smart indent
+set tw=79              "textwidth, That will automatically wrap text as close 
+                       "to 79 characters as white space allows without 
+                       "exceeding the 79 character limit. This option wraps at
+                       "word boundaries.
+set formatoptions+=t    "automatically wrap test at 79th characters.
 set wrap linebreak nolist "soft wrap
 "set cindent            " cindent
 "set noautoindent
 "set nosmartindent
 "set nocindent
-
 set autowrite      " auto saves changes when quitting and swiching buffer
 set expandtab      " tabs are converted to spaces, use only when required
 "set sm             " show matching braces, somewhat annoying...
 "set nowrap         " don't wrap lines
-
 syntax on           " syntax highlighing
+
+filetype plugin indent on
+
 if has("gui_running")
 " See ~/.gvimrc
 set guifont=Monospace\ 10  " use this font 
@@ -64,16 +67,16 @@ au FileType helpfile nnoremap <buffer><cr> <c-]>   " Enter selects subject
 au FileType helpfile nnoremap <buffer><bs> <c-T>   " Backspace to go back
 
 " When using mutt, text width=72
-au FileType mail,tex set textwidth=72
-"au FileType cpp,c,java,sh,pl,php,phtml,asp  set autoindent
-au FileType cpp,c,java,sh,pl,php,phtml,asp,xml,javascript,html  set smartindent
+" au FileType mail,tex set textwidth=80
+au FileType cpp,c,java,sh,py,php,html,h set autoindent 
+" address code paste in terminal
 nnoremap <C-p> :set invpaste paste?<CR>
 set pastetoggle=<C-p>
 set showmode
 "au FileType cpp,c,java,sh,pl,php,phtml,asp  set cindent
 "au BufRead mutt*[0-9] set tw=72
 
-" Automatically chmod +x Shell and Perl scripts
+"Automatically chmod +x Shell and Perl scripts
 "au BufWritePost   *.sh             !chmod +x %
 "au BufWritePost   *.pl             !chmod +x %
 
@@ -91,12 +94,11 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
-
 autocmd FileType php noremap <C-L> :!php -l %<CR>
 autocmd Filetype html,xml,xsl source ~/.vim/closetag.vim
 endif
 
-    " Save and make current file.o
+" Save and make current file.o
 function! Make()
     let curr_dir = expand('%:h')
     if curr_dir == ''
@@ -108,9 +110,47 @@ function! Make()
     execute 'lcd -'
 endfunction
 
+if exists('+colorcolumn')
+    set colorcolumn=80
+else
+    au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+endif
 "----------------------------cscopeconfiguration------------------------
-    
+if has("cscope")
+    set csprg=/usr/bin/cscope
+    set csto=0
+    set cst
+    set csverb
+    " C symbol
+    nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+    " definition
+    nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+    " functions that called by this function
+    nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+    " funtions that calling this function
+    nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+    " test string
+    nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+    " egrep pattern
+    nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+    " file
+    nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+    " files #including this file
+    nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 
+    " Automatically make cscope connections
+    function! LoadCscope()
+        let db = findfile("cscope.out", ".;")
+        if (!empty(db))
+            let path = strpart(db, 0, match(db, "/cscope.out$"))
+            set nocscopeverbose " suppress 'duplicate connection' error
+            exe "cs add " . db . " " . path
+            set cscopeverbose
+        endif
+    endfunction
+    au BufEnter /* call LoadCscope()
+
+endif
 "-----------------------Keyboard mapping setting------------------------
 "{cmd} {attr} {lhs} {rhs}
 "
@@ -183,17 +223,20 @@ map <silent> <C-N> :silent noh<CR> " turn off highlighted search
 "map ,h :source $VIM/vim70/syntax/2html.vim<cr>:w<cr>:clo<cr>
 
 " Open and close all the three plugins on the same time
-"nmap <C-F7> :TrinityToggleAll<CR>
+nmap <C-F7> :TrinityToggleAll<CR>
 " Open and close the srcexpl.vim separately
-"nmap <C-F9> :TrinityToggleSourceExplorer<CR>
+nmap <C-F9> :TrinityToggleSourceExplorer<CR>
 " Open and close the taglist.vim separately
-"nmap <C-F10> :TrinityToggleTagList<CR>
+nmap <C-F10> :TrinityToggleTagList<CR>
 " Open and close the NERD_tree.vim separately
-"nmap <C-F11> :TrinityToggleNERDTree<CR>
+nmap <C-F11> :TrinityToggleNERDTree<CR>
 
 " Common command line typos
 "cmap W w
 "cmap Q q
+
+"eclim configurations
+let g:EclimCompletionMethod = 'omnifunc'
 
 " Keyboard mapping for numeric keypad
 imap <Esc>OM <c-m>
