@@ -1,9 +1,4 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/usr/local/jamaica-6.3-2/target/linux-x86_64/examples/Queens/src'
-let g:netrw_dirhist_2='/usr/local/jamaica-6.3-2/target/linux-x86_64/examples/Queens'
-let g:netrw_dirhist_3='/home/gassa/research/fivm-rtdroid/rtdroid/src'
-let g:netrw_dirhist_4='/home/gassa/research/fivm-rtdroid/rtdroid'
-let g:netrw_dirhist_5='/home/gassa/research/uav/ivy-apps'
-let g:netrw_dirhist_6='/home/gassa/my_code/blog_workspace/octopress/blog/2014/04/27/jpapabench1'
-let g:netrw_dirhist_7='/home/gassa/research/specJVM2008/specjvm/compress/src'
+let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_1='/home/gassa/research/fivm-rtdroid'
+let g:netrw_dirhist_2='/home/gassa/my_code/fiji_workspace/FijiHelloWorld/src/edu/buffalo/rtdroid/cse605'

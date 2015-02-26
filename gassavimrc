@@ -41,8 +41,9 @@ set expandtab      " tabs are converted to spaces, use only when required
 "set sm             " show matching braces, somewhat annoying...
 "set nowrap         " don't wrap lines
 syntax on           " syntax highlighing
-
 filetype plugin indent on
+
+
 
 if has("gui_running")
 " See ~/.gvimrc
@@ -97,6 +98,8 @@ autocmd FileType c set omnifunc=ccomplete#Complete
 autocmd FileType php noremap <C-L> :!php -l %<CR>
 autocmd Filetype html,xml,xsl source ~/.vim/closetag.vim
 endif
+
+
 
 " Save and make current file.o
 function! Make()
@@ -208,8 +211,8 @@ endif
 
 "Tlist plugin mapping
 "nnoremap <F7> :update<CR>:call Make()<CR>
-"nnoremap <silent> <F8> :TlistToggle<CR>
-"set tags=tags,./../tags,./../tags,./../../tags,./../../../tags,./../../../../tags,./../../../../../tags,./../../../../../../tags,./../../../../../../../tags,./../../../../../../../../tags
+nnoremap <silent> <F8> :TlistToggle<CR>
+set tags=tags,./../tags,./../tags,./../../tags,./../../../tags,./../../../../tags,./../../../../../tags,./../../../../../../tags,./../../../../../../../tags,./../../../../../../../../tags
 
 
 " Keyboard mappings
@@ -237,7 +240,13 @@ nmap <C-F11> :TrinityToggleNERDTree<CR>
 
 "eclim configurations
 let g:EclimCompletionMethod = 'omnifunc'
-
+let g:EclimJavaSearchSingleResult = 'vsplit'
+let g:EclimProjectTreeActions = [
+    \ {'pattern': '.*', 'name': 'Vertical Split', 'action': 'vsplit'},
+    \ {'pattern': '.*', 'name': 'Split', 'action': 'vsplit'},
+    \ {'pattern': '.*', 'name': 'Tab', 'action': 'vsplit'},
+    \ {'pattern': '.*', 'name': 'Edit', 'action': 'vsplit'},
+  \ ]
 " Keyboard mapping for numeric keypad
 imap <Esc>OM <c-m>
 map <Esc>OM <c-m>
