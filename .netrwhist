@@ -1,4 +1,4 @@
 let g:netrw_dirhistmax  =10
 let g:netrw_dirhist_cnt =2
-let g:netrw_dirhist_1='/home/gassa/research/fivm-rtdroid'
-let g:netrw_dirhist_2='/home/gassa/my_code/fiji_workspace/FijiHelloWorld/src/edu/buffalo/rtdroid/cse605'
+let g:netrw_dirhist_1='/home/gassa/Paper/rtdroid-papers/pldi/results/android-dalvik-mmu-curve'
+let g:netrw_dirhist_2='/home/gassa/rtdroid/wind-turbine-monitor/target/include'

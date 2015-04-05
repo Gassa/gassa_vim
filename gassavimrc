@@ -20,7 +20,7 @@ set ttyfast         " smoother changes
 "set ttyscroll=0        " turn off scrolling, didn't work well with PuTTY
 set modeline        " last lines in document sets vim mode
 set modelines=3     " number lines checked for modelines
-set shortmess=atI   " Abbreviate messages
+set shortmess=atI   " Abi:input;breviate messages
 set nostartofline   " don't jump to first character when paging
 set whichwrap=b,s,h,l,<,>,[,]   " move freely between files
 "set viminfo='20,<50,s10,h
@@ -70,6 +70,8 @@ au FileType helpfile nnoremap <buffer><bs> <c-T>   " Backspace to go back
 " When using mutt, text width=72
 " au FileType mail,tex set textwidth=80
 au FileType cpp,c,java,sh,py,php,html,h set autoindent 
+au FileType tex setlocal spell spelllang=en_us
+au FileType py set noexpandtab
 " address code paste in terminal
 nnoremap <C-p> :set invpaste paste?<CR>
 set pastetoggle=<C-p>
@@ -213,7 +215,10 @@ endif
 "nnoremap <F7> :update<CR>:call Make()<CR>
 nnoremap <silent> <F8> :TlistToggle<CR>
 set tags=tags,./../tags,./../tags,./../../tags,./../../../tags,./../../../../tags,./../../../../../tags,./../../../../../../tags,./../../../../../../../tags,./../../../../../../../../tags
-
+"tlist with latex
+let tlist_tex_settings   = 'latex;i:input;s:sections;g:graphic+listing;l:label;r:ref'
+let tlist_make_settings  = 'make;m:makros;t:targets'
+"latex suite
 
 " Keyboard mappings
 map <F1> :previous<CR>  " map F1 to open previous buffer
