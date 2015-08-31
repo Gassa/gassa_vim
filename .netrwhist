@@ -1,4 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_cnt =6
 let g:netrw_dirhist_1='/home/gassa/Paper/rtdroid-papers/pldi/results/android-dalvik-mmu-curve'
 let g:netrw_dirhist_2='/home/gassa/rtdroid/wind-turbine-monitor/target/include'
+let g:netrw_dirhist_3='/home/gassa/research/rtdroid-lib/src/edu/buffalo/rtdroid'
+let g:netrw_dirhist_4='/etc/dbus-1/system.d'
+let g:netrw_dirhist_5='/home/gassa/.config'
+let g:netrw_dirhist_6='/home/gassa/galileo-builds'
